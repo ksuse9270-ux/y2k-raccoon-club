@@ -59,13 +59,13 @@
                     <!-- 动态加载 -->
                 </div>
                 <div style="margin-top: 15px; text-align: center; color: #666; font-size: 11px;">
-                    💡 点击图片查看大图
+                    💡 点击迷因查看详情 | 向下拖动查看更多
                 </div>
             </div>
         </div>
 
-        <!-- 窗口 3: 浣熊图片库 (后层) -->
-        <div class="window images-window" style="z-index: 80; left: 300px; top: 200px; width: 700px;">
+        <!-- 窗口 3: 浣熊图片库 (中层) -->
+        <div class="window images-window" style="z-index: 80; left: 300px; top: 200px; width: 700px; height: 400px;">
             <div class="title-bar">
                 <span>🖼️ 浣熊图片库 - Raccoon Gallery</span>
                 <div class="title-buttons">
@@ -80,7 +80,7 @@
                     <!-- 动态加载 -->
                 </div>
                 <div style="margin-top: 10px; text-align: center; color: #666; font-size: 10px;">
-                    图片来自 Unsplash 免费素材库
+                    图片来自 Unsplash 免费素材库 | 点击查看大图
                 </div>
             </div>
         </div>
@@ -98,12 +98,14 @@
             <div class="window-content">
                 <h3>🦝 有趣的浣熊知识</h3>
                 <ul class="facts-list">
-                    <li>🧠 浣熊能记住3年前的解决方案</li>
-                    <li>🏃 时速可达24公里</li>
-                    <li>🌙 夜行动物，白天睡觉</li>
-                    <li>🧤 前爪超级灵活</li>
-                    <li>💧 会在水中"洗"食物</li>
-                    <li>👀 眼睛在黑暗中会发光</li>
+                    <li>🧠 <strong>聪慧的大脑</strong> - 能记住3年前的解决方案</li>
+                    <li>🏃 <strong>速度惊人</strong> - 时速可达24公里</li>
+                    <li>🌙 <strong>夜行生物</strong> - 白天睡觉，晚上活动</li>
+                    <li>🧤 <strong>灵活前爪</strong> - 可以打开许多容器</li>
+                    <li>💧 <strong>洗食高手</strong> - 在水中"洗"食物以感受质地</li>
+                    <li>👀 <strong>夜视能力</strong> - 眼睛在黑暗中会发光</li>
+                    <li>🎭 <strong>演员天赋</strong> - 会装死来逃脱危险</li>
+                    <li>💪 <strong>强大体力</strong> - 可以举起自身重量的20倍</li>
                 </ul>
             </div>
         </div>
@@ -125,16 +127,16 @@
                 
                 <div class="stats-section">
                     <div class="stat-box">
-                        <div class="stat-number">🦝</div>
-                        <div class="stat-label">浣熊爱好者</div>
+                        <div class="stat-number">1.2K</div>
+                        <div class="stat-label">爱好者</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-number">😂</div>
-                        <div class="stat-label">迷因数量</div>
+                        <div class="stat-number">567</div>
+                        <div class="stat-label">迷因</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-number">💬</div>
-                        <div class="stat-label">社区话题</div>
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">话题</div>
                     </div>
                 </div>
             </div>
@@ -143,21 +145,22 @@
     </div>
 
     <!-- 右下角装饰窗口 -->
-    <div class="decorative-window" style="position: fixed; bottom: 40px; right: 20px; z-index: 50;">
+    <div class="decorative-window" style="position: fixed; bottom: 40px; right: 20px; z-index: 50; width: 220px;">
         <div class="title-bar">
             <span>📢 最新消息</span>
             <div class="title-buttons">
                 <button>_</button>
                 <button>□</button>
-                <button>×</button>
+                <button onclick="this.closest('.decorative-window').style.display='none'">×</button>
             </div>
         </div>
-        <div class="window-content" style="width: 200px;">
-            <p style="font-size: 11px; margin: 0;">
-                🆕 新增浣熊迷因库<br>
-                🎨 优化了千禧年风格<br>
-                📸 添加了真实图片<br>
-                💕 感谢所有浣熊粉丝！
+        <div class="window-content" style="width: 100%;">
+            <p style="font-size: 11px; margin: 0; line-height: 1.6;">
+                🆕 <strong>v2.0 上线！</strong><br>
+                ✨ 新增真实浣熊图片<br>
+                🎨 优化千禧年风格<br>
+                📸 改进迷因库<br>
+                💕 感谢你的支持！
             </p>
         </div>
     </div>
