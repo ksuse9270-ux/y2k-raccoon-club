@@ -33,42 +33,45 @@ const raccoonMemes = [
 const raccoonImages = [
     {
         url: 'https://images.unsplash.com/photo-1444464666175-1c6f0f4b4d4f?w=400&h=400&fit=crop',
-        title: '可爱浣熊 #1 - 仰望天空'
+        title: '可爱浣熊 #1'
     },
     {
         url: 'https://images.unsplash.com/photo-1577934212681-e6bab6ad0623?w=400&h=400&fit=crop',
-        title: '调皮浣熊 #2 - 捣乱高手'
+        title: '调皮浣熊 #2'
     },
     {
         url: 'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=400&h=400&fit=crop',
-        title: '睡眠浣熊 #3 - 困死了'
+        title: '睡眠浣熊 #3'
     },
     {
         url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',
-        title: '树上浣熊 #4 - 登山家'
+        title: '树上浣熊 #4'
     },
     {
         url: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop',
-        title: '饮水浣熊 #5 - 解渴时刻'
+        title: '饮水浣熊 #5'
     },
     {
         url: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=400&h=400&fit=crop',
-        title: '家族浣熊 #6 - 温暖时光'
+        title: '家族浣熊 #6'
     },
     {
         url: 'https://images.unsplash.com/photo-1573865526894-10342b9b757d?w=400&h=400&fit=crop',
-        title: '野生浣熊 #7 - 森林漫步'
+        title: '野生浣熊 #7'
     },
     {
         url: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=400&h=400&fit=crop',
-        title: '靠近浣熊 #8 - 特写镜头'
+        title: '靠近浣熊 #8'
     }
 ];
 
 // 初始化迷因库
 function initMemeGallery() {
     const gallery = document.getElementById('meme-gallery');
-    if (!gallery) return;
+    if (!gallery) {
+        console.error('找不到 meme-gallery 元素');
+        return;
+    }
 
     gallery.innerHTML = '';
     raccoonMemes.forEach((meme) => {
@@ -76,45 +79,108 @@ function initMemeGallery() {
         memeItem.className = 'meme-item';
         memeItem.innerHTML = `<span class="meme-icon">${meme.emoji}</span><span class="meme-label">${meme.label}</span>`;
         memeItem.title = meme.desc;
+        memeItem.style.cursor = 'pointer';
         memeItem.onclick = () => {
-            alert(`🦝 ${meme.label}\n\n${meme.desc}\n\n—— 浣熊俱乐部`);
+            alert(`🦝 ${meme.label}\n\n${meme.desc}`);
         };
         gallery.appendChild(memeItem);
     });
+    console.log('✅ 迷因库已加载：' + raccoonMemes.length + '个');
 }
 
 // 初始化图片库
 function initImageGallery() {
     const gallery = document.getElementById('image-gallery');
-    if (!gallery) return;
+    if (!gallery) {
+        console.error('找不到 image-gallery 元素');
+        return;
+    }
 
     gallery.innerHTML = '';
     raccoonImages.forEach((image, index) => {
         const card = document.createElement('div');
         card.className = 'image-card';
-        card.innerHTML = `<img src="${image.url}" alt="${image.title}" onerror="this.src='https://via.placeholder.com/140?text=Raccoon+${index + 1}'" loading="lazy">`;
+        const img = document.createElement('img');
+        img.src = image.url;
+        img.alt = image.title;
+        img.style.cursor = 'pointer';
+        img.onerror = function() {
+            this.src = 'https://via.placeholder.com/140?text=Raccoon';
+        };
+        card.appendChild(img);
         card.title = image.title;
+        card.style.cursor = 'pointer';
         card.onclick = () => openImageModal(image.url, image.title);
         gallery.appendChild(card);
     });
+    console.log('✅ 图片库已加载：' + raccoonImages.length + '张图片');
 }
 
 // 打开图片模态框
 function openImageModal(imageUrl, title) {
     const modal = document.createElement('div');
     modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <div class="modal-title">
-                <span>🖼️ ${title}</span>
-                <button style="background: linear-gradient(to bottom, #dfdfdf, #808080); border: 1px solid #dfdfdf; border-right: 1px solid #000; border-bottom: 1px solid #000; width: 16px; height: 14px; cursor: pointer; font-size: 10px; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="this.closest('.modal').remove()">×</button>
-            </div>
-            <div class="modal-body">
-                <img src="${imageUrl}" alt="${title}" onerror="this.src='https://via.placeholder.com/400?text=Image+Failed'" style="max-width: 90vw; max-height: 70vh;">
-                <p style="margin-top: 10px; font-size: 10px; color: #666;">© Unsplash - 免费使用 🦝</p>
-            </div>
-        </div>
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
     `;
+    
+    const content = document.createElement('div');
+    content.style.cssText = `
+        background: linear-gradient(to bottom, #dfdfdf, #c0c0c0);
+        border: 2px solid;
+        border-color: #dfdfdf #808080 #808080 #dfdfdf;
+        max-width: 80vw;
+        max-height: 80vh;
+        overflow: auto;
+        padding: 0;
+    `;
+    
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = `
+        background: linear-gradient(to right, #000080, #1084d7);
+        color: #fff;
+        padding: 3px 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 11px;
+        height: 18px;
+    `;
+    titleEl.innerHTML = `
+        <span>🖼️ ${title}</span>
+        <button style="background: linear-gradient(to bottom, #dfdfdf, #808080); border: 1px solid #dfdfdf; border-right: 1px solid #000; border-bottom: 1px solid #000; width: 16px; height: 14px; cursor: pointer; font-size: 10px; padding: 0; display: flex; align-items: center; justify-content: center;">×</button>
+    `;
+    titleEl.querySelector('button').onclick = () => modal.remove();
+    
+    const body = document.createElement('div');
+    body.style.cssText = 'padding: 10px; text-align: center;';
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = title;
+    img.style.cssText = 'max-width: 90vw; max-height: 60vh; object-fit: contain;';
+    img.onerror = function() {
+        this.src = 'https://via.placeholder.com/400?text=Image+Failed';
+    };
+    body.appendChild(img);
+    
+    const credit = document.createElement('p');
+    credit.style.cssText = 'margin-top: 10px; font-size: 10px; color: #666;';
+    credit.textContent = '© Unsplash - 免费使用 🦝';
+    body.appendChild(credit);
+    
+    content.appendChild(titleEl);
+    content.appendChild(body);
+    modal.appendChild(content);
     modal.onclick = (e) => {
         if (e.target === modal) modal.remove();
     };
@@ -141,8 +207,6 @@ function makeWindowsDraggable() {
         if (!titleBar) return;
 
         let isDragging = false;
-        let currentX;
-        let currentY;
         let initialX;
         let initialY;
 
@@ -156,10 +220,9 @@ function makeWindowsDraggable() {
 
         document.addEventListener('mousemove', (e) => {
             if (isDragging) {
-                currentX = e.clientX - initialX;
-                currentY = e.clientY - initialY;
+                let currentX = e.clientX - initialX;
+                let currentY = e.clientY - initialY;
                 
-                // 限制窗口在视口内
                 currentX = Math.max(0, Math.min(currentX, window.innerWidth - windowEl.offsetWidth));
                 currentY = Math.max(0, Math.min(currentY, window.innerHeight - 40));
                 
@@ -173,7 +236,6 @@ function makeWindowsDraggable() {
             windowEl.style.cursor = 'move';
         });
 
-        // 提升窗口
         windowEl.addEventListener('mousedown', () => {
             const maxZ = Math.max(...Array.from(windows).map(w => parseInt(window.getComputedStyle(w).zIndex) || 0));
             windowEl.style.zIndex = maxZ + 1;
@@ -187,7 +249,6 @@ function setupWindowButtons() {
         const buttons = windowEl.querySelectorAll('.title-buttons button');
         
         if (buttons[0]) {
-            // 最小化按钮
             buttons[0].addEventListener('click', () => {
                 const content = windowEl.querySelector('.window-content');
                 if (content) {
@@ -200,19 +261,22 @@ function setupWindowButtons() {
     });
 }
 
-// 页面加载时初始化
-document.addEventListener('DOMContentLoaded', () => {
+// 页面完全加载后初始化
+function initializeApp() {
+    console.log('🦝 初始化 Y2K Raccoon Club v2.0...');
     initMemeGallery();
     initImageGallery();
     makeWindowsDraggable();
     setupWindowButtons();
+    console.log('✅ 初始化完成！');
+}
 
-    // 控制台消息
-    console.log('%c🦝 Y2K Raccoon Club v2.0', 'color: #000080; font-size: 16px; font-weight: bold;');
-    console.log('%c欢迎来到浣熊的千禧年世界！', 'color: #1084d7; font-size: 12px;');
-    console.log('%c拖动窗口标题栏来移动窗口', 'color: #666;');
-});
+// 使用 DOMContentLoaded 确保 DOM 已加载
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
+}
 
-// 防止默认行为
-document.addEventListener('dragover', (e) => e.preventDefault());
-document.addEventListener('drop', (e) => e.preventDefault());
+console.log('%c🦝 Y2K Raccoon Club v2.0', 'color: #000080; font-size: 16px; font-weight: bold;');
+console.log('%c欢迎来到浣熊的千禧年世界！', 'color: #1084d7; font-size: 12px;');
