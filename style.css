@@ -1,0 +1,425 @@
+/* Windows 98 Y2K 风格 CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #b4a7d6 0%, #73a5d6 100%);
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+    color: #000;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* 任务栏 */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: linear-gradient(to right, #000080, #1084d7);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+    border-top: 2px solid #dfdfdf;
+    border-left: 2px solid #dfdfdf;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    z-index: 1000;
+}
+
+.taskbar-left {
+    display: flex;
+    gap: 4px;
+}
+
+.start-btn {
+    padding: 2px 6px;
+    background: linear-gradient(to bottom, #dfdfdf, #808080);
+    border: 2px outset #dfdfdf;
+    color: #000;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: pointer;
+    min-width: 60px;
+}
+
+.start-btn:active {
+    border-style: inset;
+}
+
+.taskbar-center {
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.time {
+    display: inline-block;
+}
+
+/* 容器 */
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+/* 侧边栏菜单 */
+.sidebar {
+    width: 200px;
+    background: linear-gradient(to bottom, #dfdfdf, #c0c0c0);
+    border: 2px outset #dfdfdf;
+    padding: 4px;
+}
+
+.menu-title {
+    background: linear-gradient(to right, #000080, #1084d7);
+    color: #fff;
+    padding: 4px 8px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu-item {
+    display: block;
+    padding: 4px 8px;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.1s;
+}
+
+.menu-item:hover {
+    background: linear-gradient(to right, #000080, #1084d7);
+    color: #fff;
+    border: 2px solid #dfdfdf;
+}
+
+.menu-item.active {
+    background: linear-gradient(to right, #000080, #1084d7);
+    color: #fff;
+}
+
+/* 主内容区 */
+.main-content {
+    flex: 1;
+}
+
+/* Windows 98 窗口 */
+.window {
+    background: linear-gradient(to bottom, #dfdfdf, #c0c0c0);
+    border: 2px outset #dfdfdf;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 0 #ffffff, -1px -1px 0 #808080, 1px -1px 0 #000000, -1px 1px 0 #000000;
+}
+
+.title-bar {
+    background: linear-gradient(to right, #000080, #1084d7);
+    color: #fff;
+    padding: 2px 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 11px;
+    height: 18px;
+}
+
+.title-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.title-buttons button {
+    width: 16px;
+    height: 14px;
+    background: linear-gradient(to bottom, #dfdfdf, #808080);
+    border: 1px solid #dfdfdf;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-buttons button:active {
+    border-style: inset;
+}
+
+.window-content {
+    padding: 8px;
+    background: #c0c0c0;
+}
+
+.window-content h1,
+.window-content h2,
+.window-content h3 {
+    margin-bottom: 10px;
+    color: #000080;
+    font-size: 14px;
+}
+
+.window-content p {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* 可交互的浣熊 */
+.raccoon-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background: #c0c0c0;
+    border: 1px solid #dfdfdf;
+}
+
+.raccoon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.raccoon-container .emotion-btn {
+    padding: 4px 12px;
+    margin: 4px;
+    background: linear-gradient(to bottom, #dfdfdf, #808080);
+    border: 2px outset #dfdfdf;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.raccoon-container .emotion-btn:active {
+    border-style: inset;
+}
+
+/* 迷因库 */
+.meme-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.meme-item {
+    background: #dfdfdf;
+    border: 2px solid #808080;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.meme-item:hover {
+    background: linear-gradient(to right, #000080, #1084d7);
+    color: #fff;
+    border: 2px solid #000;
+}
+
+.meme-emoji {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+.meme-item p {
+    font-size: 10px;
+    margin: 0;
+}
+
+/* 浣熊百科列表 */
+.facts-list {
+    list-style: none;
+    padding: 0;
+}
+
+.facts-list li {
+    padding: 8px 10px;
+    margin: 4px 0;
+    background: #dfdfdf;
+    border-left: 4px solid #000080;
+    line-height: 1.6;
+}
+
+/* 社区卡片 */
+.community-card {
+    background: #dfdfdf;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #808080;
+}
+
+.community-card h3 {
+    margin-bottom: 8px;
+}
+
+.community-card textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 4px;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+    border: 2px inset #dfdfdf;
+    background: #fff;
+    margin-bottom: 8px;
+}
+
+.community-card textarea:focus {
+    outline: none;
+    border: 2px inset #808080;
+}
+
+.submit-btn {
+    padding: 4px 16px;
+    background: linear-gradient(to bottom, #dfdfdf, #808080);
+    border: 2px outset #dfdfdf;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.submit-btn:active {
+    border-style: inset;
+}
+
+/* 统计数据 */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.stat-item {
+    background: #dfdfdf;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #808080;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000080;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: #666;
+}
+
+/* 图片库 */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.image-card {
+    background: #dfdfdf;
+    border: 2px outset #dfdfdf;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.image-card:hover {
+    border: 2px inset #dfdfdf;
+    box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+}
+
+.image-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.image-card p {
+    padding: 6px;
+    font-size: 10px;
+    text-align: center;
+    background: #c0c0c0;
+    margin: 0;
+}
+
+/* 分段 */
+.section {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 加载动画 */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #000080;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #dfdfdf;
+    border-top: 3px solid #000080;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .meme-gallery,
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
