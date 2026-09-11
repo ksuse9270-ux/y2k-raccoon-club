@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y2K Raccoon Club - 浣熊迷因爱好者社区</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Windows 98 风格的任务栏 -->
+    <div class="taskbar">
+        <div class="taskbar-left">
+            <button class="start-btn">🪟 Start</button>
+        </div>
+        <div class="taskbar-center">
+            <span class="time" id="time">12:34</span>
+        </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 左侧菜单（Windows 98 风格） -->
+        <div class="sidebar">
+            <div class="menu-title">🦝 浣熊俱乐部</div>
+            <ul class="menu">
+                <li><a href="#home" class="menu-item active">🏠 首页</a></li>
+                <li><a href="#memes" class="menu-item">😂 迷因库</a></li>
+                <li><a href="#facts" class="menu-item">📚 浣熊百科</a></li>
+                <li><a href="#community" class="menu-item">👥 社区</a></li>
+                <li><a href="#about" class="menu-item">ℹ️ 关于我们</a></li>
+            </ul>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 首页区域 -->
+            <section id="home" class="section active">
+                <div class="window win98">
+                    <div class="title-bar">
+                        <span>欢迎来到 Y2K Raccoon Club</span>
+                        <div class="title-buttons">
+                            <button>_</button>
+                            <button>□</button>
+                            <button>×</button>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <h1>🦝 欢迎来到浣熊俱乐部！</h1>
+                        <p>一个充满迷因、表情包和浣熊爱好者的千禧年风格社区</p>
+                        
+                        <!-- 可交互的浣熊 -->
+                        <div class="raccoon-container">
+                            <div class="raccoon" id="interactive-raccoon">
+                                <div class="raccoon-head">
+                                    <div class="raccoon-ears"></div>
+                                    <div class="raccoon-face">
+                                        <div class="raccoon-eyes">
+                                            <div class="raccoon-eye left" id="left-eye"></div>
+                                            <div class="raccoon-eye right" id="right-eye"></div>
+                                        </div>
+                                        <div class="raccoon-mask"></div>
+                                        <div class="raccoon-mouth" id="mouth">⌣</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="raccoon-buttons">
+                                <button class="emotion-btn" data-emotion="happy">😄 开心</button>
+                                <button class="emotion-btn" data-emotion="sad">😢 伤心</button>
+                                <button class="emotion-btn" data-emotion="confused">😕 困惑</button>
+                                <button class="emotion-btn" data-emotion="excited">🤩 兴奋</button>
+                                <button class="emotion-btn" data-emotion="sus">🤨 可疑</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 迷因库区域 -->
+            <section id="memes" class="section">
+                <div class="window win98">
+                    <div class="title-bar">
+                        <span>迷因库 - Raccoon Meme Gallery</span>
+                        <div class="title-buttons">
+                            <button>_</button>
+                            <button>□</button>
+                            <button>×</button>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <h2>🎨 浣熊迷因表情包</h2>
+                        <div class="meme-gallery">
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝💰</div>
+                                <p>Trash Panda 发财梦</p>
+                            </div>
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝😴</div>
+                                <p>困到眯眼</p>
+                            </div>
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝🤔</div>
+                                <p>沉思的浣熊</p>
+                            </div>
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝💪</div>
+                                <p>强壮的浣熊</p>
+                            </div>
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝👀</div>
+                                <p>窥探者</p>
+                            </div>
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝🎉</div>
+                                <p>派对浣熊</p>
+                            </div>
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝😡</div>
+                                <p>生气的浣熊</p>
+                            </div>
+                            <div class="meme-item">
+                                <div class="meme-emoji">🦝❤️</div>
+                                <p>爱上浣熊了</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 浣熊百科区域 -->
+            <section id="facts" class="section">
+                <div class="window win98">
+                    <div class="title-bar">
+                        <span>浣熊百科 - Raccoon Facts</span>
+                        <div class="title-buttons">
+                            <button>_</button>
+                            <button>□</button>
+                            <button>×</button>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <h2>📚 有趣的浣熊知识</h2>
+                        <ul class="facts-list">
+                            <li>🦝 浣熊是聪明的动物，它们能记住3年前的解决方案</li>
+                            <li>🦝 浣熊的前爪非常灵活，能打开很多容器和门</li>
+                            <li>🦝 浣熊会在水中"洗"食物，这让它们能感受食物的质地</li>
+                            <li>🦝 一只浣熊可以跑到时速24公里（15英里/小时）</li>
+                            <li>🦝 浣熊是夜行动物，白天睡觉，晚上活动</li>
+                            <li>🦝 浣熊的学名是 Procyon lotor，意思是"洗手的小偷"</li>
+                            <li>🦝 浣熊的眼睛在黑暗中闪闪发光，因为有反光膜</li>
+                            <li>🦝 一只浣熊在野外可以活2-3年，在圈养下可以活20年</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 社区区域 -->
+            <section id="community" class="section">
+                <div class="window win98">
+                    <div class="title-bar">
+                        <span>社区 - Community</span>
+                        <div class="title-buttons">
+                            <button>_</button>
+                            <button>□</button>
+                            <button>×</button>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <h2>👥 加入我们的社区</h2>
+                        <div class="community-card">
+                            <h3>分享你的浣熊故事</h3>
+                            <p>是否看过有趣的浣熊视频或照片？在评论区分享吧！</p>
+                            <textarea placeholder="分享你的浣熊故事..."></textarea>
+                            <button class="submit-btn">提交</button>
+                        </div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <div class="stat-number">1,234</div>
+                                <div class="stat-label">社区成员</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">567</div>
+                                <div class="stat-label">浣熊迷因</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">89</div>
+                                <div class="stat-label">社区主题</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 关于区域 -->
+            <section id="about" class="section">
+                <div class="window win98">
+                    <div class="title-bar">
+                        <span>关于我们 - About Us</span>
+                        <div class="title-buttons">
+                            <button>_</button>
+                            <button>□</button>
+                            <button>×</button>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <h2>ℹ️ 关于 Y2K Raccoon Club</h2>
+                        <p>这是一个致力于浣熊爱好者的千禧年风格社区网站。我们收集和分享浣熊相关的迷因、知识和故事。</p>
+                        <p>网站使用 Windows 98 怀旧美学设计，致敬互联网的黄金时代。</p>
+                        <p>🦝 让我们一起热爱这些可爱的小家伙！</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
