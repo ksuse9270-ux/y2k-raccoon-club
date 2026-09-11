@@ -1,280 +1,218 @@
-// Y2K Raccoon Club 交互脚本
+// Y2K Raccoon Club v2.0 - 改进版脚本
 
 // 时钟更新
 function updateTime() {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
-    document.getElementById('time').textContent = `${hours}:${minutes}`;
+    const timeEl = document.getElementById('time');
+    if (timeEl) {
+        timeEl.textContent = `${hours}:${minutes}`;
+    }
 }
 setInterval(updateTime, 1000);
 updateTime();
 
-// 菜单导航
-const menuItems = document.querySelectorAll('.menu-item');
-const sections = document.querySelectorAll('.section');
+// 浣熊迷因数据
+const raccoonMemes = [
+    { emoji: '🦝', label: 'Trash Panda', desc: '垃圾熊' },
+    { emoji: '🦝💰', label: '发财梦', desc: '财富自由' },
+    { emoji: '🦝😴', label: '困到眯眼', desc: '睡眠不足' },
+    { emoji: '🦝🤔', label: '沉思浣熊', desc: '思考人生' },
+    { emoji: '🦝💪', label: '强壮浣熊', desc: '健身达人' },
+    { emoji: '🦝👀', label: '窥探者', desc: '在线窃听' },
+    { emoji: '🦝🎉', label: '派对浣熊', desc: '狂欢时刻' },
+    { emoji: '🦝😡', label: '生气浣熊', desc: '愤怒时刻' },
+    { emoji: '🦝❤️', label: '爱上浣熊', desc: '深陷浣熊' },
+    { emoji: '🦝🚀', label: '火箭浣熊', desc: '飙升中' },
+    { emoji: '🦝🎭', label: '戏精浣熊', desc: '我是演员' },
+    { emoji: '🦝😎', label: '酷浣熊', desc: '社恐好手' }
+];
 
-menuItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // 移除所有活跃状态
-        menuItems.forEach(i => i.classList.remove('active'));
-        sections.forEach(s => s.classList.remove('active'));
-        
-        // 添加活跃状态
-        item.classList.add('active');
-        const targetId = item.getAttribute('href').substring(1);
-        document.getElementById(targetId).classList.add('active');
-    });
-});
-
-// 可交互浣熊情绪系统
-const emotionButtons = document.querySelectorAll('.emotion-btn');
-const raccoonMouth = document.getElementById('mouth');
-const leftEye = document.getElementById('left-eye');
-const rightEye = document.getElementById('right-eye');
-
-const emotions = {
-    happy: {
-        mouth: '😄',
-        leftEye: '●',
-        rightEye: '●',
-        description: '开心的浣熊在跳舞！'
+// 真实浣熊图片 URLs (Unsplash 高质量免费图片)
+const raccoonImages = [
+    {
+        url: 'https://images.unsplash.com/photo-1444464666175-1c6f0f4b4d4f?w=400&h=400&fit=crop',
+        title: '可爱浣熊 #1 - 仰望天空'
     },
-    sad: {
-        mouth: '😢',
-        leftEye: '◞',
-        rightEye: '◝',
-        description: '伤心的浣熊需要安慰...'
+    {
+        url: 'https://images.unsplash.com/photo-1577934212681-e6bab6ad0623?w=400&h=400&fit=crop',
+        title: '调皮浣熊 #2 - 捣乱高手'
     },
-    confused: {
-        mouth: '😕',
-        leftEye: '◆',
-        rightEye: '◆',
-        description: '困惑的浣熊在思考...'
+    {
+        url: 'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=400&h=400&fit=crop',
+        title: '睡眠浣熊 #3 - 困死了'
     },
-    excited: {
-        mouth: '🤩',
-        leftEye: '◉',
-        rightEye: '◉',
-        description: '兴奋的浣熊太开心了！'
+    {
+        url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',
+        title: '树上浣熊 #4 - 登山家'
     },
-    sus: {
-        mouth: '🤨',
-        leftEye: '⊙',
-        rightEye: '⊙',
-        description: '可疑的浣熊发现了什么...'
+    {
+        url: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop',
+        title: '饮水浣熊 #5 - 解渴时刻'
+    },
+    {
+        url: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=400&h=400&fit=crop',
+        title: '家族浣熊 #6 - 温暖时光'
+    },
+    {
+        url: 'https://images.unsplash.com/photo-1573865526894-10342b9b757d?w=400&h=400&fit=crop',
+        title: '野生浣熊 #7 - 森林漫步'
+    },
+    {
+        url: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=400&h=400&fit=crop',
+        title: '靠近浣熊 #8 - 特写镜头'
     }
-};
+];
 
-emotionButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const emotion = btn.dataset.emotion;
-        const emotionData = emotions[emotion];
-        
-        raccoonMouth.textContent = emotionData.mouth;
-        leftEye.textContent = emotionData.leftEye;
-        rightEye.textContent = emotionData.rightEye;
-        
-        // 添加动画效果
-        const raccoon = document.getElementById('interactive-raccoon');
-        raccoon.style.animation = 'none';
-        setTimeout(() => {
-            raccoon.style.animation = 'float 3s ease-in-out infinite';
-        }, 10);
-        
-        // 显示提示文字
-        console.log(emotionData.description);
-    });
-});
+// 初始化迷因库
+function initMemeGallery() {
+    const gallery = document.getElementById('meme-gallery');
+    if (!gallery) return;
 
-// Unsplash API 配置
-const UNSPLASH_API_KEY = 'YOUR_UNSPLASH_API_KEY'; // 稍后替换
-
-// 从 Unsplash 获取浣熊图片
-async function fetchRaccoonImages() {
-    try {
-        // 首先检查是否已有缓存的图片
-        const cached = localStorage.getItem('raccoonImages');
-        if (cached) {
-            const images = JSON.parse(cached);
-            displayImages(images);
-            return;
-        }
-
-        // 如果没有缓存，使用示例图片 URL（这些是免费资源）
-        const exampleImages = [
-            {
-                id: '1',
-                urls: { regular: 'https://images.unsplash.com/photo-1444464666175-1c6f0f4b4d4f?w=400&h=300&fit=crop' },
-                alt_description: '可爱的浣熊 1'
-            },
-            {
-                id: '2',
-                urls: { regular: 'https://images.unsplash.com/photo-1577934212681-e6bab6ad0623?w=400&h=300&fit=crop' },
-                alt_description: '调皮的浣熊 2'
-            },
-            {
-                id: '3',
-                urls: { regular: 'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=400&h=300&fit=crop' },
-                alt_description: '睡眠的浣熊 3'
-            },
-            {
-                id: '4',
-                urls: { regular: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop' },
-                alt_description: '树上的浣熊 4'
-            },
-            {
-                id: '5',
-                urls: { regular: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop' },
-                alt_description: '饮水的浣熊 5'
-            },
-            {
-                id: '6',
-                urls: { regular: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=400&h=300&fit=crop' },
-                alt_description: '家族浣熊 6'
-            }
-        ];
-
-        displayImages(exampleImages);
-        localStorage.setItem('raccoonImages', JSON.stringify(exampleImages));
-    } catch (error) {
-        console.error('获取图片失败:', error);
-        displayPlaceholderImages();
-    }
-}
-
-// 显示图片
-function displayImages(images) {
-    const memesSection = document.getElementById('memes');
-    if (!memesSection) return;
-
-    const galleryDiv = memesSection.querySelector('.meme-gallery');
-    if (!galleryDiv) return;
-
-    // 清空现有迷因项，保留前8个
-    const existingMemes = galleryDiv.querySelectorAll('.meme-item');
-    existingMemes.forEach((item, index) => {
-        if (index >= 8) {
-            item.remove();
-        }
-    });
-
-    // 添加图片项
-    images.forEach((image, index) => {
-        const imageItem = document.createElement('div');
-        imageItem.className = 'image-card';
-        imageItem.innerHTML = `
-            <img src="${image.urls.regular}" alt="${image.alt_description || '浣熊图片' + (index + 1)}" onerror="this.src='https://via.placeholder.com/150?text=Raccoon+${index + 1}'">
-            <p>${image.alt_description || '浣熊 ' + (index + 1)}</p>
-        `;
-        galleryDiv.appendChild(imageItem);
-
-        // 添加点击事件放大图片
-        imageItem.addEventListener('click', () => {
-            openImageModal(image.urls.regular, image.alt_description);
-        });
+    gallery.innerHTML = '';
+    raccoonMemes.forEach((meme) => {
+        const memeItem = document.createElement('div');
+        memeItem.className = 'meme-item';
+        memeItem.innerHTML = `<span class="meme-icon">${meme.emoji}</span><span class="meme-label">${meme.label}</span>`;
+        memeItem.title = meme.desc;
+        memeItem.onclick = () => {
+            alert(`🦝 ${meme.label}\n\n${meme.desc}\n\n—— 浣熊俱乐部`);
+        };
+        gallery.appendChild(memeItem);
     });
 }
 
-// 占位符图片（如果 API 失败）
-function displayPlaceholderImages() {
-    const placeholders = [
-        { url: 'https://via.placeholder.com/150?text=Raccoon+1&bg=8B7D99', desc: '浣熊 1' },
-        { url: 'https://via.placeholder.com/150?text=Raccoon+2&bg=8B7D99', desc: '浣熊 2' },
-        { url: 'https://via.placeholder.com/150?text=Raccoon+3&bg=8B7D99', desc: '浣熊 3' },
-        { url: 'https://via.placeholder.com/150?text=Raccoon+4&bg=8B7D99', desc: '浣熊 4' },
-        { url: 'https://via.placeholder.com/150?text=Raccoon+5&bg=8B7D99', desc: '浣熊 5' },
-        { url: 'https://via.placeholder.com/150?text=Raccoon+6&bg=8B7D99', desc: '浣熊 6' }
-    ];
+// 初始化图片库
+function initImageGallery() {
+    const gallery = document.getElementById('image-gallery');
+    if (!gallery) return;
 
-    const memesSection = document.getElementById('memes');
-    const galleryDiv = memesSection.querySelector('.meme-gallery');
-
-    placeholders.forEach((item, index) => {
-        const imageCard = document.createElement('div');
-        imageCard.className = 'image-card';
-        imageCard.innerHTML = `
-            <img src="${item.url}" alt="${item.desc}">
-            <p>${item.desc}</p>
-        `;
-        galleryDiv.appendChild(imageCard);
+    gallery.innerHTML = '';
+    raccoonImages.forEach((image, index) => {
+        const card = document.createElement('div');
+        card.className = 'image-card';
+        card.innerHTML = `<img src="${image.url}" alt="${image.title}" onerror="this.src='https://via.placeholder.com/140?text=Raccoon+${index + 1}'" loading="lazy">`;
+        card.title = image.title;
+        card.onclick = () => openImageModal(image.url, image.title);
+        gallery.appendChild(card);
     });
 }
 
-// 图片模态框
-function openImageModal(imageUrl, description) {
-    // 创建模态框
+// 打开图片模态框
+function openImageModal(imageUrl, title) {
     const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-title">
+                <span>🖼️ ${title}</span>
+                <button style="background: linear-gradient(to bottom, #dfdfdf, #808080); border: 1px solid #dfdfdf; border-right: 1px solid #000; border-bottom: 1px solid #000; width: 16px; height: 14px; cursor: pointer; font-size: 10px; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="this.closest('.modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+                <img src="${imageUrl}" alt="${title}" onerror="this.src='https://via.placeholder.com/400?text=Image+Failed'" style="max-width: 90vw; max-height: 70vh;">
+                <p style="margin-top: 10px; font-size: 10px; color: #666;">© Unsplash - 免费使用 🦝</p>
+            </div>
+        </div>
     `;
-
-    const content = document.createElement('div');
-    content.style.cssText = `
-        background: white;
-        padding: 20px;
-        border: 2px outset #dfdfdf;
-        max-width: 600px;
-        max-height: 80vh;
-        overflow: auto;
-        text-align: center;
-    `;
-
-    content.innerHTML = `
-        <img src="${imageUrl}" style="max-width: 100%; max-height: 500px; margin-bottom: 10px;" alt="${description}">
-        <p style="margin: 10px 0; font-family: 'MS Sans Serif';">${description}</p>
-        <button onclick="this.closest('div').parentElement.remove()" style="padding: 4px 16px; background: linear-gradient(to bottom, #dfdfdf, #808080); border: 2px outset #dfdfdf; cursor: pointer; font-size: 11px; font-weight: bold;">关闭</button>
-    `;
-
-    modal.appendChild(content);
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.remove();
+    };
     document.body.appendChild(modal);
-
-    // 点击背景关闭
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.remove();
-        }
-    });
 }
-
-// 页面加载时获取图片
-window.addEventListener('load', () => {
-    fetchRaccoonImages();
-});
 
 // 提交评论
-document.addEventListener('DOMContentLoaded', () => {
-    const submitBtn = document.querySelector('.submit-btn');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', () => {
-            const textarea = document.querySelector('.community-card textarea');
-            if (textarea && textarea.value.trim()) {
-                alert(`🦝 感谢你的分享！你的故事："${textarea.value.substring(0, 50)}..." 已被记录！`);
-                textarea.value = '';
-            } else {
-                alert('请先输入你的浣熊故事哦！');
-            }
-        });
+function submitComment() {
+    const textarea = document.querySelector('.comment-box');
+    if (textarea && textarea.value.trim()) {
+        alert(`🦝 感谢你的分享！\n\n"${textarea.value.substring(0, 50)}..."\n\n你的故事已被记录在浣熊心中！`);
+        textarea.value = '';
+    } else {
+        alert('请先输入你的浣熊故事哦！🦝');
     }
-});
-
-// Pinterest 图片搜索功能（可选）
-function searchPinterestRaccoons() {
-    // 这个函数可以在将来扩展
-    // Pinterest API 需要授权，这里是备选方案
-    const pinterestUrl = 'https://www.pinterest.com/search/pins/?q=raccoon';
-    console.log('Pinterest 搜索链接：', pinterestUrl);
 }
 
-console.log('🦝 Y2K Raccoon Club 已加载！欢迎来到浣熊迷因世界！');
+// 窗口拖动功能
+function makeWindowsDraggable() {
+    const windows = document.querySelectorAll('.window:not(.decorative-window)');
+    
+    windows.forEach(windowEl => {
+        const titleBar = windowEl.querySelector('.title-bar');
+        if (!titleBar) return;
+
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+
+        titleBar.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'BUTTON') return;
+            isDragging = true;
+            initialX = e.clientX - windowEl.offsetLeft;
+            initialY = e.clientY - windowEl.offsetTop;
+            windowEl.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                
+                // 限制窗口在视口内
+                currentX = Math.max(0, Math.min(currentX, window.innerWidth - windowEl.offsetWidth));
+                currentY = Math.max(0, Math.min(currentY, window.innerHeight - 40));
+                
+                windowEl.style.left = currentX + 'px';
+                windowEl.style.top = currentY + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            windowEl.style.cursor = 'move';
+        });
+
+        // 提升窗口
+        windowEl.addEventListener('mousedown', () => {
+            const maxZ = Math.max(...Array.from(windows).map(w => parseInt(window.getComputedStyle(w).zIndex) || 0));
+            windowEl.style.zIndex = maxZ + 1;
+        });
+    });
+}
+
+// 最小化窗口功能
+function setupWindowButtons() {
+    document.querySelectorAll('.window').forEach(windowEl => {
+        const buttons = windowEl.querySelectorAll('.title-buttons button');
+        
+        if (buttons[0]) {
+            // 最小化按钮
+            buttons[0].addEventListener('click', () => {
+                const content = windowEl.querySelector('.window-content');
+                if (content) {
+                    const isHidden = content.style.display === 'none';
+                    content.style.display = isHidden ? 'block' : 'none';
+                    windowEl.style.height = isHidden ? 'auto' : '18px';
+                }
+            });
+        }
+    });
+}
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', () => {
+    initMemeGallery();
+    initImageGallery();
+    makeWindowsDraggable();
+    setupWindowButtons();
+
+    // 控制台消息
+    console.log('%c🦝 Y2K Raccoon Club v2.0', 'color: #000080; font-size: 16px; font-weight: bold;');
+    console.log('%c欢迎来到浣熊的千禧年世界！', 'color: #1084d7; font-size: 12px;');
+    console.log('%c拖动窗口标题栏来移动窗口', 'color: #666;');
+});
+
+// 防止默认行为
+document.addEventListener('dragover', (e) => e.preventDefault());
+document.addEventListener('drop', (e) => e.preventDefault());
